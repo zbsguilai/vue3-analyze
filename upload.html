@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<span>文件名：</span>
+	<input type="text" id="doc">
+	<button>选择文件</button>
+	<input type="file" id="upload" multiple onchange="getFile(value)"
+		style="opacity: 0.5; margin-left: -74px; width: 74px;">
+</body>
+</html>
+<script>
+	function getFile(value) {
+		let formData = new FormData();
+		// 获取文本框dom
+		var doc = document.getElementById('doc');
+		// 获取上传控件dom
+		var upload = document.getElementById('upload');
+		// console.log(upload.files, 'upload.files[0]')
+
+		let files = upload.files;
+		for (let i = 0; i < files.length; i++) {
+			let file = files[i]
+			formData.append('files', file)
+		}
+
+		console.log(formData.getAll('files'), 'sss')
+		console.log(formData instanceof Array)
+		console.log(typeof formData)
+		console.log(Array.from(formData))
+
+
+		// 获取文件名
+		var fileName = upload.files[0].name;
+		// 获取文件路径
+		var filePath = upload.value;
+
+		doc.value = fileName;
+
+		console.log(fileName);
+		console.log(filePath);
+	}
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script type="module">
+		import { reactive } from './vue3_test.js'
+		const obj = {
+			name: "zhangsan",
+			age: 1,
+			test1: {
+				test2: {
+					test3: 'test3'
+				}
+			}
+		}
+		const proxy = reactive(obj)
+		console.log(proxy.name)
+		proxy.test1.test2.test3 = 'demo';
+		// console.log(delete proxy.age)
+
+	</script>
+</body>
+</html>

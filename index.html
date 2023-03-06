@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script type="module">
+
+		import { mount, ref, reactive, computed } from './vue3.js'
+		const App = {
+			$data: null,
+			setup() {
+				let count = ref(0);
+				let time = reactive({ seconds: 0 })
+				let com = computed(() => `get compute: ${count.value + time.seconds}`)
+
+				setInterval(() => {
+					time.seconds++
+				}, 1000)
+				setInterval(() => {
+					count.value++
+				}, 1000)
+				return { count, time, com }
+			},
+			render() {
+				return `
+				<h1>Reactive Works:</h1>
+				<h5>this is ractive data : ${this.$data.time.seconds}</h5>
+				<h5>this is ractive data : ${this.$data.count.value}</h5>
+				<h5>this is computed data : ${this.$data.com.value}</h5>
+				`
+			}
+		};
+		//mount做了什么事：把render赋值给节点的innerHTML
+		// 当数据改变时候，都会触发effect 中的update方法
+		mount(App, document.querySelector("#app")) 
+	</script>
+
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>
